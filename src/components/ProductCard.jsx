@@ -11,6 +11,7 @@ return (
                 <Link className="btn btn-secondary">View Details</Link>
                 <button className="btn btn-primary">Add to Cart</button>
             </div>
+            <img src={product.image} />
         </div>
 
     </div>
