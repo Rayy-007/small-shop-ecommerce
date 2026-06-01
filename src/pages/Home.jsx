@@ -5,7 +5,6 @@ import ProductCard from "../components/ProductCard";
 export default function Home() {
     const products = getProducts();
 
-
     return (
         <div className="page">
             <div className="home-hero">
