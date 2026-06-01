@@ -31,8 +31,6 @@ export default function Auth() {
     } else {
       navigate("/");
     }
-
-    console.log(result);
   }
 
   return (
