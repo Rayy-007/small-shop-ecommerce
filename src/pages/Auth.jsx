@@ -1,6 +1,6 @@
-import { use, useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
@@ -8,7 +8,7 @@ export default function Auth() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const { signUp, user, logout, login } = useContext(AuthContext);
+  const { signUp, user, logout, login } = useAuth();
 
   const {
     register,
@@ -26,10 +26,11 @@ export default function Auth() {
       result = login(data.email, data.password);
     }
 
-    if (!result.success) {
-      setError(result.error);
-    } else {
+    if (result.success) {
       navigate("/");
+      setError(null);
+    } else {
+      setError(result.error);
     }
   }
 
@@ -46,8 +47,6 @@ export default function Auth() {
             onSubmit={handleSubmit(onSubmit)}
           >
             {error && <div className="error-message">{error}</div>}
-            <button onClick={() => logout()}>Logout</button>
-            {user && <p>User singed up - {user.email}</p>}
             <div className="form-group">
               <label htmlFor="email" className="form-label">
                 Email
